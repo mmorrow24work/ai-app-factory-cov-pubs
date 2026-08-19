@@ -1,0 +1,32 @@
+# CLAUDE.md
+
+Conventions for unattended (Lane B) work on `ai-app-factory-cov-pubs`.
+
+List Coventry pubs with facilities, public and personal ratings, sortable by popularity and postcode proximity, shareable, at https://ai-app-factory-cov-pubs.coldwire.uk/
+
+## Repo map
+
+```
+src/routes/+page.svelte                    Main script — the thing this project does
+theme.css, theme-toggle.js         Framework-free light/dark theme — link into any HTML page, see Conventions below
+tests/                             Test suite for src/routes/+page.svelte
+docs/journal.md                    Per-issue build metrics, appended by the workflow only — never edit by hand
+.github/workflows/claude.yml       The Lane B driver
+.github/scripts/journal-entry.sh   Metrics-append script the workflow calls
+.env                               Local secrets — never commit, see .env.example
+```
+
+## Conventions
+
+- **Never edit `docs/journal.md` by hand or from within a PR branch.** It's appended by `.github/workflows/claude.yml` *after* your PR merges, via `.github/scripts/journal-entry.sh`. Editing it in your branch means every open PR touches the same file and goes conflicting the moment any other PR merges.
+- **If an issue asks you to create or edit an HTML page, link `theme.css`/`theme-toggle.js` into it rather than inventing your own theming or color scheme.** `<link rel="stylesheet" href="theme.css">` in `<head>`, then a plain blocking `<script src="theme-toggle.js"></script>` right after it (not `defer`, not `type="module"` — it needs to run before first paint to avoid a flash of the wrong theme). No HTML changes beyond those two tags are required — the toggle button is injected automatically if the page doesn't already have one. Project-specific CSS can still override `theme.css`'s custom properties (`--color-bg`, `--color-fg`, `--color-muted`, `--color-border`, `--color-accent`, `--font-sans`) or any of its rules; it's a starting point, not a constraint.
+- Keep commit and PR scope to the files named in the issue or in the repo map above.
+- (none yet — add project-specific conventions here as they come up)
+
+## Definition of done
+
+- The issue's acceptance criteria are met.
+- Tests pass: `pytest`.
+- Any shell script added is `bash -n`-clean and executable (`chmod +x`).
+- Any JSON added is valid (`jq . <file>` succeeds).
+- PR description explains what you implemented, what you verified, and anything you could not verify unattended.
