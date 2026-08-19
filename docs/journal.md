@@ -19,12 +19,12 @@ Recomputed by `.github/scripts/journal-entry.sh` on every run.
 <!-- VELOCITY_START -->
 | Metric | Value |
 |---|---|
-| Issues with recorded metrics | 0 |
-| Successful runs | 0 |
-| Mean time per issue | n/a |
-| Mean turns per issue | n/a |
-| Mean output tokens per issue | n/a |
-| Mean estimated cost per issue | n/a |
+| Issues with recorded metrics | 1 |
+| Successful runs | 1 |
+| Mean time per issue | 3m 55s |
+| Mean turns per issue | 40 |
+| Mean output tokens per issue | 23,368 |
+| Mean estimated cost per issue | $0.3509 |
 <!-- VELOCITY_END -->
 
 ---
@@ -33,3 +33,16 @@ Recomputed by `.github/scripts/journal-entry.sh` on every run.
 
 <!-- ENTRIES_START -->
 <!-- New entries are appended below this marker, newest last. -->
+
+## 2026-08-19 — Issue #3: M1: Pub data schema, Overpass normaliser, data/pubs.json, and schema tests
+
+- **Result:** success
+- **PR:** #17
+- **Milestone:** M1: Pub data pipeline
+- **Model:** claude-sonnet-5
+- **Execution Duration:** 235 seconds
+- **Turns:** 40
+- **Input Tokens:** 128
+- **Output Tokens:** 23368
+- **Estimated Cost:** $0.3509 (notional — see above)
+- **Run:** https://github.com/mmorrow24work/ai-app-factory-cov-pubs/actions/runs/32284330577
