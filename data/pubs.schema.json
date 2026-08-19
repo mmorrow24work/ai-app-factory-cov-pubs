@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ai-app-factory-cov-pubs.coldwire.uk/data/pubs.schema.json",
+  "title": "Coventry pubs dataset",
+  "description": "amenity=pub nodes, ways and relations inside the Coventry administrative boundary, normalised from OpenStreetMap via the Overpass API.",
+  "type": "object",
+  "required": ["attribution", "generated_from", "pubs"],
+  "additionalProperties": false,
+  "properties": {
+    "attribution": {
+      "type": "string",
+      "const": "© OpenStreetMap contributors",
+      "description": "Required verbatim by ODbL 1.0 wherever this data is shown."
+    },
+    "generated_from": {
+      "type": "string",
+      "description": "The Overpass endpoint (or source file, for offline normalisation) this dataset was generated from."
+    },
+    "pubs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/pub" }
+    }
+  },
+  "$defs": {
+    "pub": {
+      "type": "object",
+      "required": [
+        "id",
+        "slug",
+        "name",
+        "lat",
+        "lon",
+        "address",
+        "postcode",
+        "website",
+        "facilities",
+        "osm_url"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^(node|way|relation)/[0-9]+$",
+          "description": "The OSM ref, e.g. node/123456."
+        },
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lat": {
+          "type": "number",
+          "minimum": 52.36,
+          "maximum": 52.46
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -1.62,
+          "maximum": -1.41
+        },
+        "address": {
+          "type": ["string", "null"]
+        },
+        "postcode": {
+          "type": ["string", "null"]
+        },
+        "website": {
+          "type": ["string", "null"]
+        },
+        "facilities": {
+          "type": "object",
+          "required": ["food", "garden", "parking"],
+          "additionalProperties": false,
+          "properties": {
+            "food": { "enum": ["yes", "no", "unknown"] },
+            "garden": { "enum": ["yes", "no", "unknown"] },
+            "parking": { "enum": ["yes", "no", "unknown"] }
+          }
+        },
+        "osm_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    }
+  }
+}
